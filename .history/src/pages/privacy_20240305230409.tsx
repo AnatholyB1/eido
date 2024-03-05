@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
       </p>
       <h2 className="text-2xl font-bold">Usage Data</h2>
       <p className="text-lg">
-  We may also collect information how the Service is accessed and used (&ldquo;Usage Data&rdquo;). This Usage Data may include information such as your computer&apos;s Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
+        We may also collect information how the Service is accessed and used (<ldquo>Usage Data<rdquo>). This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.
       </p>
       <h2 className="text-2xl font-bold">Cookies Data</h2>
       <p className="text-lg">
