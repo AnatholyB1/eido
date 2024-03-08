@@ -90,13 +90,30 @@ import {
 } from "@/components/ui/dialog"
 
 
-import { Stats } from './type';
+
 
 import { ColumnDef, ColumnFiltersState, SortingState, VisibilityState, getFilteredRowModel, getSortedRowModel } from "@tanstack/react-table"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-
+export type Stats = {
+  _id: string;
+  nom: string;
+  frag: number;
+  clef: number;
+  etoile_1: boolean;
+  etoile_2: boolean;
+  etoile_3: boolean;
+  etoile_4: boolean;
+  souhait_1: boolean;
+  souhait_2: boolean;
+  souhait_3: boolean;
+  souhait_4: boolean;
+  souhait_5: boolean;
+  souhait_6: boolean;
+  obtenu: boolean;
+  userId: string;
+};
 
 const columns: ColumnDef<Stats>[] = navigator.userAgent.match(
       /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
@@ -320,7 +337,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { formSchema } from './type';
+ 
+export const formSchema = z.object({
+  nom: z.string().min(1, { message: 'The name is required' }),
+  frag: z.number(),
+  clef: z.number(),
+  etoile_1: z.boolean(),
+  etoile_2: z.boolean(),
+  etoile_3: z.boolean(),
+  etoile_4: z.boolean(),
+  souhait_1: z.boolean(),
+  souhait_2: z.boolean(),
+  souhait_3: z.boolean(),
+  souhait_4: z.boolean(),
+  souhait_5: z.boolean(),
+  souhait_6: z.boolean(),
+  obtenu: z.boolean(),
+  userId: z.string(),
+
+})
 
     
 type StatsWithoutId = Omit<Stats, '_id'>;
