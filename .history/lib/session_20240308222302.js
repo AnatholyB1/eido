@@ -37,10 +37,6 @@ export function logOut() {
 }
 
 export function isConnected(req) {
-  if (!req || !req.headers) {
-    throw new Error('Request object is missing or malformed');
-  }
-
   reqCache = req
   const cookies = parse(req.headers.cookie || '');
   return !!cookies.session;
