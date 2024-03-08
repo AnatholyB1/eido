@@ -51,228 +51,217 @@ export default function Home() {
       }
       )
   },[toast, setData, data, connected])
-
-  const [columns, setColumns] = useState<ColumnDef<Stats>[]>([]);
-
-useEffect(() => {
-  const isMobile = navigator.userAgent.match(
+  
+  
+  const columns: ColumnDef<Stats>[] = navigator.userAgent.match(
     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-  );
+) ? 
+[
+  {
+  accessorKey: "nom",
+  header: ({ column }) => {
+    return (
+      <Button
+        className='p-0'
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Nom
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    )
+  },
+  },
+{
+  accessorKey: "obtenu",
+  header: "Obtenu",
+},
+{
+  accessorKey: "userId",
+   header: ({ column }) => {
+    return (
+      <Button
+        className='p-0'
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Joueur
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    )
+  },
+},
+{
+  id: "actions",
+  cell: ({ row }) => {
+    const stats = row.original
 
-  setColumns(
-    isMobile
-      ? 
-      [
-        {
-        accessorKey: "nom",
-        header: ({ column }) => {
-          return (
-            <Button
-              className='p-0'
-              variant="ghost"
-              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-            >
-              Nom
-              <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
-          )
-        },
-        },
-      {
-        accessorKey: "obtenu",
-        header: "Obtenu",
-      },
-      {
-        accessorKey: "userId",
-         header: ({ column }) => {
-          return (
-            <Button
-              className='p-0'
-              variant="ghost"
-              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-            >
-              Joueur
-              <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
-          )
-        },
-      },
-      {
-        id: "actions",
-        cell: ({ row }) => {
-          const stats = row.original
-      
-          return (
-            <Dialog>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0">
-                  <span className="sr-only">Open menu</span>
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem
-                  onClick={() => navigator.clipboard.writeText(stats._id)}
-                >
-                  Copy line id
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                    <DialogTrigger className='text-start'>Edit</DialogTrigger>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-              </DropdownMenu>
-              <DialogStats data={stats} />
-            </Dialog>
-          )
-        },
-      }
-      ]
-      :[
-        {
-          accessorKey: "nom",
-          header: ({ column }) => {
-            return (
-              <Button
-                className='p-0'
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-              >
-                Nom
-                <ArrowUpDown className="ml-2 h-4 w-4" />
-              </Button>
-            )
-          },
-        },
-        {
-          accessorKey: "frag",
-          header: ({ column }) => {
-            return (
-              <Button
-                className='p-0'
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-              >
-                Frag
-                <ArrowUpDown className="ml-2 h-4 w-4" />
-              </Button>
-            )
-          },
-        },
-        {
-          accessorKey: "clef",
-           header: ({ column }) => {
-            return (
-              <Button
-                className='p-0'
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-              >
-                Clef
-                <ArrowUpDown className="ml-2 h-4 w-4" />
-              </Button>
-            )
-          },
-        },
-        {
-          accessorKey: "etoile_1",
-          header: "Etoile 1",
-        },
-        {
-          accessorKey: "etoile_2",
-          header: "Etoile 2",
-        },
-        {
-          accessorKey: "etoile_3",
-          header: "Etoile 3",
-        },
-        {
-          accessorKey: "etoile_4",
-          header: "Etoile 4",
-        },
-        {
-          accessorKey: "souhait_1",
-          header: "Souhait 1",
-        },
-        {
-          accessorKey: "souhait_2",
-          header: "Souhait 2",
-        },
-        {
-          accessorKey: "souhait_3",
-          header: "Souhait 3",
-        },
-        {
-          accessorKey: "souhait_4",
-          header: "Souhait 4",
-        },
-        {
-          accessorKey: "souhait_5",
-          header: "Souhait 5",
-        },
-        {
-          accessorKey: "souhait_6",
-          header: "Souhait 6",
-        },
-        {
-          accessorKey: "obtenu",
-          header: "Obtenu",
-        },
-        {
-          accessorKey: "userId",
-           header: ({ column }) => {
-            return (
-              <Button
-                className='p-0'
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-              >
-                Joueur
-                <ArrowUpDown className="ml-2 h-4 w-4" />
-              </Button>
-            )
-          },
-        },
-        {
-          id: "actions",
-          cell: ({ row }) => {
-            const stats = row.original
-        
-            return (
-              <Dialog>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="h-8 w-8 p-0">
-                    <span className="sr-only">Open menu</span>
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                  <DropdownMenuItem
-                    onClick={() => navigator.clipboard.writeText(stats._id)}
-                  >
-                    Copy line id
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                      <DialogTrigger className='w-full text-start'>Edit</DialogTrigger>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-                </DropdownMenu>
-                    <DialogStats data={stats}/>
-                </Dialog>
-            )
-          },
-        }
-        ]
-  );
-}, []);
-  
-  
+    return (
+      <Dialog>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem
+            onClick={() => navigator.clipboard.writeText(stats._id)}
+          >
+            Copy line id
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+              <DialogTrigger className='text-start'>Edit</DialogTrigger>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+        </DropdownMenu>
+        <DialogStats data={stats} />
+      </Dialog>
+    )
+  },
+}
+]
+  : [
+{
+  accessorKey: "nom",
+  header: ({ column }) => {
+    return (
+      <Button
+        className='p-0'
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Nom
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    )
+  },
+},
+{
+  accessorKey: "frag",
+  header: ({ column }) => {
+    return (
+      <Button
+        className='p-0'
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Frag
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    )
+  },
+},
+{
+  accessorKey: "clef",
+   header: ({ column }) => {
+    return (
+      <Button
+        className='p-0'
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Clef
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    )
+  },
+},
+{
+  accessorKey: "etoile_1",
+  header: "Etoile 1",
+},
+{
+  accessorKey: "etoile_2",
+  header: "Etoile 2",
+},
+{
+  accessorKey: "etoile_3",
+  header: "Etoile 3",
+},
+{
+  accessorKey: "etoile_4",
+  header: "Etoile 4",
+},
+{
+  accessorKey: "souhait_1",
+  header: "Souhait 1",
+},
+{
+  accessorKey: "souhait_2",
+  header: "Souhait 2",
+},
+{
+  accessorKey: "souhait_3",
+  header: "Souhait 3",
+},
+{
+  accessorKey: "souhait_4",
+  header: "Souhait 4",
+},
+{
+  accessorKey: "souhait_5",
+  header: "Souhait 5",
+},
+{
+  accessorKey: "souhait_6",
+  header: "Souhait 6",
+},
+{
+  accessorKey: "obtenu",
+  header: "Obtenu",
+},
+{
+  accessorKey: "userId",
+   header: ({ column }) => {
+    return (
+      <Button
+        className='p-0'
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Joueur
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    )
+  },
+},
+{
+  id: "actions",
+  cell: ({ row }) => {
+    const stats = row.original
 
+    return (
+      <Dialog>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem
+            onClick={() => navigator.clipboard.writeText(stats._id)}
+          >
+            Copy line id
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+              <DialogTrigger className='w-full text-start'>Edit</DialogTrigger>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+        </DropdownMenu>
+            <DialogStats data={stats}/>
+        </Dialog>
+    )
+  },
+}
+];
   
 
   return (
